@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://freetopdf.com/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
