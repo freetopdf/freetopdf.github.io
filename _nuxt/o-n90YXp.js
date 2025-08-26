@@ -1,4 +1,4 @@
-import { x as useHead$1, y as tryUseNuxtApp, z as hasInjectionContext, A as inject, B as headSymbol } from "./Cjp7n_DA.js";
+import { x as useHead$1, y as tryUseNuxtApp, z as hasInjectionContext, A as inject, B as headSymbol } from "./DDiZUtB7.js";
 function injectHead(nuxtApp) {
   var _a;
   const nuxt = nuxtApp || tryUseNuxtApp();

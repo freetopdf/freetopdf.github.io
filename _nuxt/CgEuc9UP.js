@@ -1,5 +1,5 @@
-import { u as useHead } from "./DdG7PQXe.js";
-import { f as createBlock, w as withCtx, r as resolveComponent, o as openBlock, b as createVNode, d as createTextVNode, a as createBaseVNode } from "./Cjp7n_DA.js";
+import { u as useHead } from "./o-n90YXp.js";
+import { f as createBlock, w as withCtx, r as resolveComponent, o as openBlock, b as createVNode, d as createTextVNode, a as createBaseVNode } from "./DDiZUtB7.js";
 const _sfc_main = {
   __name: "about",
   setup(__props) {

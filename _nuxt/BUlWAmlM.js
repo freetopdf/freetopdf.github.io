@@ -1,10 +1,10 @@
-import { u as useRuntimeConfig } from "./Cjp7n_DA.js";
+import { u as useRuntimeConfig } from "./DDiZUtB7.js";
 var define_process_env_default = {};
 const adsenseConfig = {
   // 실제 애드센스 클라이언트 ID로 변경하세요
   clientId: "ca-pub-6441782123701736",
   // 테스트 모드 설정 (localhost 및 개발 환경에서 테스트 광고 표시)
-  testMode: window.location.hostname === "localhost",
+  testMode: true,
   // 각 페이지별 광고 슬롯 ID
   slots: {
     main: "1234567890",

@@ -1,5 +1,5 @@
-import { _ as _export_sfc, c as createElementBlock, o as openBlock, a as createBaseVNode, t as toDisplayString, b as createVNode, w as withCtx, d as createTextVNode, e as __nuxt_component_0 } from "./Cjp7n_DA.js";
-import { u as useHead } from "./DdG7PQXe.js";
+import { _ as _export_sfc, c as createElementBlock, o as openBlock, a as createBaseVNode, t as toDisplayString, b as createVNode, w as withCtx, d as createTextVNode, e as __nuxt_component_0 } from "./DDiZUtB7.js";
+import { u as useHead } from "./o-n90YXp.js";
 const _hoisted_1 = { class: "antialiased bg-white dark:bg-black dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-black" };
 const _hoisted_2 = { class: "max-w-520px text-center z-20" };
 const _hoisted_3 = ["textContent"];

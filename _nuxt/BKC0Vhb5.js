@@ -1,5 +1,5 @@
 import { g as getFullApiUrl, a as apiEndpoints } from "./CZ13b-GK.js";
-import { G as useRoute, g as ref, f as createBlock, w as withCtx, r as resolveComponent, o as openBlock, b as createVNode, d as createTextVNode, a as createBaseVNode, t as toDisplayString, j as unref } from "./Cjp7n_DA.js";
+import { G as useRoute, g as ref, f as createBlock, w as withCtx, r as resolveComponent, o as openBlock, b as createVNode, d as createTextVNode, a as createBaseVNode, t as toDisplayString, j as unref } from "./DDiZUtB7.js";
 const _hoisted_1 = { class: "text-body-2 text-medium-emphasis mb-4" };
 const _hoisted_2 = { class: "mt-4" };
 const _sfc_main = {

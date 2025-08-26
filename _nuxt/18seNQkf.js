@@ -1,7 +1,7 @@
-import { _ as __nuxt_component_0 } from "./BptVZlFT.js";
-import { _ as _export_sfc, g as ref, h as onMounted, c as createElementBlock, a as createBaseVNode, b as createVNode, w as withCtx, u as useRuntimeConfig, r as resolveComponent, i as useRouter, o as openBlock, d as createTextVNode, t as toDisplayString, f as createBlock, j as unref, F as Fragment, k as renderList } from "./Cjp7n_DA.js";
-import { g as getAdsenseConfig } from "./DUUat7gY.js";
-import { u as useHead } from "./DdG7PQXe.js";
+import { _ as __nuxt_component_0 } from "./Dx0xSiXl.js";
+import { _ as _export_sfc, g as ref, h as onMounted, c as createElementBlock, a as createBaseVNode, b as createVNode, w as withCtx, u as useRuntimeConfig, r as resolveComponent, i as useRouter, o as openBlock, d as createTextVNode, t as toDisplayString, f as createBlock, j as unref, F as Fragment, k as renderList } from "./DDiZUtB7.js";
+import { g as getAdsenseConfig } from "./BUlWAmlM.js";
+import { u as useHead } from "./o-n90YXp.js";
 const _hoisted_1 = { class: "hero-section" };
 const _hoisted_2 = { class: "usage-info-section" };
 const _hoisted_3 = {

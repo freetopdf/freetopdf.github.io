@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./Cp2ZcBCw.js","./DdG7PQXe.js","./oDi5LzEB.js","./BptVZlFT.js","./DUUat7gY.js","./GoogleAdsense.CVlMHAlK.css","./index.SJv5P_-p.css","./D-ztB4ia.js","./CZ13b-GK.js","./BSgF0NGN.js","./InterstitialAd.CG-ouQAU.css","./merge.Bug-UOJt.css","./DmjVHd17.js","./terms.Dfo936rS.css","./DSLCHzeP.js","./result.BgcmaPel.css","./CUTV8Kog.js","./contact.BWPfnfDU.css","./B_DCgI2W.js","./privacy.B7fxvGPc.css","./BiIa-rEh.js","./env-test.udr8w4Hx.css","./B2KhBsaC.js","./pdf-guide.QBHb1B6p.css","./C83vwIjC.js","./secure-pdf.CeGKvU_a.css","./B4ozTbRM.js","./B5UK9kKp.js","./FullscreenLoading.DTeILedK.css","./pdf-to-word.DELruOoL.css","./DEav7vPJ.js","./word-to-pdf.ChzV-kIa.css","./CCYYmOw4.js","./convertToPdf.-2YkAVlc.css","./CKfF2CtG.js","./C3Jpuh4r.js","./bU1Y2n2b.js","./pdf-tools-comparison.qvn7OWdB.css","./p2B_YqiB.js","./error-404.CkhVpEVu.css","./p1BN-E9K.js","./error-500.CwWdQP5R.css"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./CgEuc9UP.js","./o-n90YXp.js","./18seNQkf.js","./Dx0xSiXl.js","./BUlWAmlM.js","./GoogleAdsense.CVlMHAlK.css","./index.SJv5P_-p.css","./CEn_i0pw.js","./CZ13b-GK.js","./C9MCHj6l.js","./InterstitialAd.CG-ouQAU.css","./merge.Bug-UOJt.css","./gCLKyajX.js","./terms.Dfo936rS.css","./fBqtR-fV.js","./result.BgcmaPel.css","./D07pNrb9.js","./contact.BWPfnfDU.css","./CMzXsXwD.js","./privacy.B7fxvGPc.css","./BJGs28jc.js","./env-test.udr8w4Hx.css","./CEr2xfTG.js","./pdf-guide.QBHb1B6p.css","./DIDPQYC9.js","./secure-pdf.CeGKvU_a.css","./BhbpwVfe.js","./CFDHrp3U.js","./FullscreenLoading.DTeILedK.css","./pdf-to-word.DELruOoL.css","./DN_T_tbg.js","./word-to-pdf.ChzV-kIa.css","./CzwldHX1.js","./convertToPdf.-2YkAVlc.css","./wSgU_prC.js","./BKC0Vhb5.js","./BmCtx_U7.js","./pdf-tools-comparison.qvn7OWdB.css","./Ca3aXFku.js","./error-404.CkhVpEVu.css","./Cd66RdKg.js","./error-500.CwWdQP5R.css"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -11561,10 +11561,46 @@ async function getRouteRules(arg) {
     return {};
   }
 }
-async function _importPayload(payloadURL) {
-  {
+async function loadPayload(url, opts = {}) {
+  const shouldLoadPayload = await isPrerendered(url);
+  if (!shouldLoadPayload) {
     return null;
   }
+  const payloadURL = await _getPayloadURL(url, opts);
+  return await _importPayload(payloadURL) || null;
+}
+const filename = "_payload.json";
+async function _getPayloadURL(url, opts = {}) {
+  const u = new URL(url, "http://localhost");
+  if (u.host !== "localhost" || hasProtocol(u.pathname, { acceptRelative: true })) {
+    throw new Error("Payload URL must not include hostname: " + url);
+  }
+  const config = /* @__PURE__ */ useRuntimeConfig();
+  const hash = opts.hash || (opts.fresh ? Date.now() : config.app.buildId);
+  const cdnURL = config.app.cdnURL;
+  const baseOrCdnURL = cdnURL && await isPrerendered(url) ? cdnURL : config.app.baseURL;
+  return joinURL(baseOrCdnURL, u.pathname, filename + (hash ? `?${hash}` : ""));
+}
+async function _importPayload(payloadURL) {
+  const payloadPromise = fetch(payloadURL, { cache: "force-cache" }).then((res) => res.text().then(parsePayload));
+  try {
+    return await payloadPromise;
+  } catch (err) {
+    console.warn("[nuxt] Cannot load payload ", payloadURL, err);
+  }
+  return null;
+}
+async function isPrerendered(url = useRoute$1().path) {
+  const nuxtApp = useNuxtApp();
+  url = withoutTrailingSlash(url);
+  const manifest2 = await getAppManifest();
+  if (manifest2.prerendered.includes(url)) {
+    return true;
+  }
+  return nuxtApp.runWithContext(async () => {
+    const rules = await getRouteRules({ path: url });
+    return !!rules.prerender && !rules.redirect;
+  });
 }
 let payloadCache = null;
 async function getNuxtClientPayload() {
@@ -13760,82 +13796,82 @@ const _routes = [
   {
     name: "about",
     path: "/about",
-    component: () => __vitePreload(() => import("./Cp2ZcBCw.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./CgEuc9UP.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url)
   },
   {
     name: "index",
     path: "/",
-    component: () => __vitePreload(() => import("./oDi5LzEB.js"), true ? __vite__mapDeps([2,3,4,5,1,6]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./18seNQkf.js"), true ? __vite__mapDeps([2,3,4,5,1,6]) : void 0, import.meta.url)
   },
   {
     name: "merge",
     path: "/merge",
-    component: () => __vitePreload(() => import("./D-ztB4ia.js"), true ? __vite__mapDeps([7,3,4,5,8,9,10,1,11]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./CEn_i0pw.js"), true ? __vite__mapDeps([7,3,4,5,8,9,10,1,11]) : void 0, import.meta.url)
   },
   {
     name: "terms",
     path: "/terms",
-    component: () => __vitePreload(() => import("./DmjVHd17.js"), true ? __vite__mapDeps([12,1,13]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./gCLKyajX.js"), true ? __vite__mapDeps([12,1,13]) : void 0, import.meta.url)
   },
   {
     name: "result",
     path: "/result",
-    component: () => __vitePreload(() => import("./DSLCHzeP.js"), true ? __vite__mapDeps([14,15]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./fBqtR-fV.js"), true ? __vite__mapDeps([14,15]) : void 0, import.meta.url)
   },
   {
     name: "contact",
     path: "/contact",
-    component: () => __vitePreload(() => import("./CUTV8Kog.js"), true ? __vite__mapDeps([16,8,1,17]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./D07pNrb9.js"), true ? __vite__mapDeps([16,8,1,17]) : void 0, import.meta.url)
   },
   {
     name: "privacy",
     path: "/privacy",
-    component: () => __vitePreload(() => import("./B_DCgI2W.js"), true ? __vite__mapDeps([18,1,19]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./CMzXsXwD.js"), true ? __vite__mapDeps([18,1,19]) : void 0, import.meta.url)
   },
   {
     name: "env-test",
     path: "/env-test",
-    component: () => __vitePreload(() => import("./BiIa-rEh.js"), true ? __vite__mapDeps([20,8,4,21]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./BJGs28jc.js"), true ? __vite__mapDeps([20,8,4,21]) : void 0, import.meta.url)
   },
   {
     name: "pdf-guide",
     path: "/pdf-guide",
-    component: () => __vitePreload(() => import("./B2KhBsaC.js"), true ? __vite__mapDeps([22,3,4,5,1,23]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./CEr2xfTG.js"), true ? __vite__mapDeps([22,3,4,5,1,23]) : void 0, import.meta.url)
   },
   {
     name: "secure-pdf",
     path: "/secure-pdf",
-    component: () => __vitePreload(() => import("./C83vwIjC.js"), true ? __vite__mapDeps([24,25]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./DIDPQYC9.js"), true ? __vite__mapDeps([24,25]) : void 0, import.meta.url)
   },
   {
     name: "pdf-to-word",
     path: "/pdf-to-word",
-    component: () => __vitePreload(() => import("./B4ozTbRM.js"), true ? __vite__mapDeps([26,3,4,5,27,28,9,8,10,1,29]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./BhbpwVfe.js"), true ? __vite__mapDeps([26,3,4,5,27,28,9,8,10,1,29]) : void 0, import.meta.url)
   },
   {
     name: "word-to-pdf",
     path: "/word-to-pdf",
-    component: () => __vitePreload(() => import("./DEav7vPJ.js"), true ? __vite__mapDeps([30,3,4,5,27,28,9,8,10,1,31]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./DN_T_tbg.js"), true ? __vite__mapDeps([30,3,4,5,27,28,9,8,10,1,31]) : void 0, import.meta.url)
   },
   {
     name: "convertToPdf",
     path: "/convertToPdf",
-    component: () => __vitePreload(() => import("./CCYYmOw4.js"), true ? __vite__mapDeps([32,27,28,8,33]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./CzwldHX1.js"), true ? __vite__mapDeps([32,27,28,8,33]) : void 0, import.meta.url)
   },
   {
     name: "download-pdf",
     path: "/download-pdf",
-    component: () => __vitePreload(() => import("./CKfF2CtG.js"), true ? __vite__mapDeps([34,8]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./wSgU_prC.js"), true ? __vite__mapDeps([34,8]) : void 0, import.meta.url)
   },
   {
     name: "download-word",
     path: "/download-word",
-    component: () => __vitePreload(() => import("./C3Jpuh4r.js"), true ? __vite__mapDeps([35,8]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./BKC0Vhb5.js"), true ? __vite__mapDeps([35,8]) : void 0, import.meta.url)
   },
   {
     name: "pdf-tools-comparison",
     path: "/pdf-tools-comparison",
-    component: () => __vitePreload(() => import("./bU1Y2n2b.js"), true ? __vite__mapDeps([36,37]) : void 0, import.meta.url)
+    component: () => __vitePreload(() => import("./BmCtx_U7.js"), true ? __vite__mapDeps([36,37]) : void 0, import.meta.url)
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -14206,6 +14242,48 @@ const onNuxtReady = (callback) => {
     requestIdleCallback$1(() => callback());
   }
 };
+const payload_client_kSYcIMYUswSDcSGoGWqM0MO2T4MjOZsQFA1GU6fqohM = /* @__PURE__ */ defineNuxtPlugin({
+  name: "nuxt:payload",
+  setup(nuxtApp) {
+    const staticKeysToRemove = /* @__PURE__ */ new Set();
+    useRouter$2().beforeResolve(async (to, from) => {
+      if (to.path === from.path) {
+        return;
+      }
+      const payload = await loadPayload(to.path);
+      if (!payload) {
+        return;
+      }
+      {
+        for (const key of staticKeysToRemove) {
+          delete nuxtApp.static.data[key];
+        }
+      }
+      for (const key in payload.data) {
+        {
+          if (!(key in nuxtApp.static.data)) {
+            staticKeysToRemove.add(key);
+          }
+        }
+        nuxtApp.static.data[key] = payload.data[key];
+      }
+    });
+    onNuxtReady(() => {
+      var _a2;
+      nuxtApp.hooks.hook("link:prefetch", async (url) => {
+        const { hostname } = new URL(url, window.location.href);
+        if (hostname === window.location.hostname) {
+          await loadPayload(url).catch(() => {
+            console.warn("[nuxt] Error preloading payload for", url);
+          });
+        }
+      });
+      if (((_a2 = navigator.connection) == null ? void 0 : _a2.effectiveType) !== "slow-2g") {
+        setTimeout(getAppManifest, 1e3);
+      }
+    });
+  }
+});
 const navigation_repaint_client_iZ4sbIDUOBlI58WRS1dxkRZJOsKNs1c7SCqRszdxr6Y = /* @__PURE__ */ defineNuxtPlugin(() => {
   const router = useRouter$2();
   onNuxtReady(() => {
@@ -42428,6 +42506,7 @@ const plugins = [
   revive_payload_client_kG4vF4SWGlhgLJRKrmco1O_zuG41odAu7e9PNPCDOtY,
   unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU,
   plugin,
+  payload_client_kSYcIMYUswSDcSGoGWqM0MO2T4MjOZsQFA1GU6fqohM,
   navigation_repaint_client_iZ4sbIDUOBlI58WRS1dxkRZJOsKNs1c7SCqRszdxr6Y,
   check_outdated_build_client__GMdmUuNCTKDee9GyDhHz84CJEYUp5_FenYjvgAxtj8,
   chunk_reload_client_90gdG_aWZaDfO85SQYWzwaOywz7zi0wBnFUoX0cT54U,
@@ -43408,8 +43487,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack2 = void 0;
-    const _Error404 = /* @__PURE__ */ defineAsyncComponent(() => __vitePreload(() => import("./p2B_YqiB.js"), true ? __vite__mapDeps([38,1,39]) : void 0, import.meta.url));
-    const _Error = /* @__PURE__ */ defineAsyncComponent(() => __vitePreload(() => import("./p1BN-E9K.js"), true ? __vite__mapDeps([40,1,41]) : void 0, import.meta.url));
+    const _Error404 = /* @__PURE__ */ defineAsyncComponent(() => __vitePreload(() => import("./Ca3aXFku.js"), true ? __vite__mapDeps([38,1,39]) : void 0, import.meta.url));
+    const _Error = /* @__PURE__ */ defineAsyncComponent(() => __vitePreload(() => import("./Cd66RdKg.js"), true ? __vite__mapDeps([40,1,41]) : void 0, import.meta.url));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(ErrorTemplate), normalizeProps$1(guardReactiveProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack2) })), null, 16);

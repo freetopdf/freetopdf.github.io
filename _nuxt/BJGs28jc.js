@@ -1,6 +1,6 @@
 import { b as getApiURL, g as getFullApiUrl, a as apiEndpoints } from "./CZ13b-GK.js";
-import { g as getAdsenseConfig } from "./DUUat7gY.js";
-import { _ as _export_sfc, u as useRuntimeConfig, g as ref, h as onMounted, c as createElementBlock, a as createBaseVNode, b as createVNode, w as withCtx, r as resolveComponent, o as openBlock, d as createTextVNode, t as toDisplayString, j as unref } from "./Cjp7n_DA.js";
+import { g as getAdsenseConfig } from "./BUlWAmlM.js";
+import { _ as _export_sfc, u as useRuntimeConfig, g as ref, h as onMounted, c as createElementBlock, a as createBaseVNode, b as createVNode, w as withCtx, r as resolveComponent, o as openBlock, d as createTextVNode, t as toDisplayString, j as unref } from "./DDiZUtB7.js";
 const _hoisted_1 = { class: "env-test" };
 const _sfc_main = {
   __name: "env-test",
@@ -9,7 +9,7 @@ const _sfc_main = {
     const nodeEnv = config.public.nodeEnv || "production";
     const apiUrl = config.public.apiUrl || "https://api.freetopdf.com";
     const adsenseClientId = config.public.adsenseClientId || "ca-pub-6441782123701736";
-    const adsenseTestMode = config.public.adsenseTestMode || "false";
+    const adsenseTestMode = config.public.adsenseTestMode || "true";
     const runtimeConfig = config.public || "Not available";
     const baseUrl = ref("Loading...");
     const apiConfigUrl = ref("Loading...");

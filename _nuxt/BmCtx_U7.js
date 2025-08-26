@@ -1,4 +1,4 @@
-import { _ as _export_sfc, g as ref, c as createElementBlock, b as createVNode, w as withCtx, r as resolveComponent, o as openBlock, a as createBaseVNode, d as createTextVNode, f as createBlock, m as createCommentVNode, n as withModifiers, t as toDisplayString, u as useRuntimeConfig } from "./Cjp7n_DA.js";
+import { _ as _export_sfc, g as ref, c as createElementBlock, b as createVNode, w as withCtx, r as resolveComponent, o as openBlock, a as createBaseVNode, d as createTextVNode, f as createBlock, m as createCommentVNode, n as withModifiers, t as toDisplayString, u as useRuntimeConfig } from "./DDiZUtB7.js";
 const _hoisted_1 = { class: "pdf-tools-comparison" };
 const _sfc_main = {
   __name: "pdf-tools-comparison",
