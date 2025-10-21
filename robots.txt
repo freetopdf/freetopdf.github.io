@@ -1,6 +1,12 @@
 User-agent: *
 Allow: /
 
+# Disallow dynamic/utility pages
+Disallow: /download-pdf
+Disallow: /download-word
+Disallow: /result
+Disallow: /env-test
+
 # Sitemap
 Sitemap: https://freetopdf.com/sitemap.xml
 
