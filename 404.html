@@ -1,23 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>FreeToPDF - Page Not Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - FreeToPDF</title>
+    <meta name="description" content="The page you are looking for could not be found. Return to FreeToPDF homepage or try our popular PDF tools.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Redirect to main app for SPA handling -->
     <script>
-        // GitHub Pages에서 404 에러 시 index.html로 리다이렉트
-        // SPA 라우팅을 위해 모든 경로를 메인 페이지로 보냄
-        var pathSegmentsToKeep = 1;
-        var l = window.location;
-        l.replace(
-            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-            l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-            l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-            l.hash
-        );
+        // Prevent infinite redirects by checking if we're already in a redirect loop
+        const currentUrl = window.location.href;
+        const hasRedirectParam = currentUrl.includes('?redirect=');
+        
+        if (!hasRedirectParam) {
+            // Store the original URL and redirect to main app
+            const originalPath = window.location.pathname + window.location.search + window.location.hash;
+            window.location.replace('/?redirect=' + encodeURIComponent(originalPath));
+        } else {
+            // If we're already in a redirect loop, show 404 content
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.style.display = 'block';
+            });
+        }
     </script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            display: none; /* Hidden by default, shown only if redirect fails */
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .error-icon {
+            font-size: 120px;
+            color: #f44336;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            min-width: 150px;
+        }
+        
+        .btn:hover {
+            background-color: #1565c0;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #1976d2;
+            border: 2px solid #1976d2;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1976d2;
+            color: white;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 40px 0;
+        }
+        
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .tool-btn {
+            padding: 10px 16px;
+            background-color: transparent;
+            color: #1976d2;
+            text-decoration: none;
+            border: 1px solid #1976d2;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .tool-btn:hover {
+            background-color: #1976d2;
+            color: white;
+        }
+        
+        @media (min-width: 768px) {
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting...</p>
+    <div class="container">
+        <div class="error-icon">⚠️</div>
+        
+        <h1>Page Not Found</h1>
+        
+        <p>Sorry, the page you're looking for doesn't exist.</p>
+        
+        <p>The URL you entered might be incorrect or the page may have been moved.</p>
+        
+        <div class="buttons">
+            <a href="/" class="btn">Go to Home</a>
+            <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <h3>Popular Tools</h3>
+        <div class="tools">
+            <a href="/pdf-to-word" class="tool-btn">PDF to Word</a>
+            <a href="/word-to-pdf" class="tool-btn">Word to PDF</a>
+            <a href="/merge" class="tool-btn">Merge PDFs</a>
+        </div>
+    </div>
 </body>
 </html>
